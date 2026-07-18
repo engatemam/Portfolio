@@ -890,6 +890,31 @@
                                         <span>Phone</span>
                                     </a>
                                 </div>
+
+                                <div class="contact-divider">
+                                    <span>Or send a direct message</span>
+                                </div>
+                                <form class="contact-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Message Sent!'); closeContact();">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="name">NAME</label>
+                                            <input type="text" id="name" placeholder="Your name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">EMAIL</label>
+                                            <input type="email" id="email" placeholder="you@email.com" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="subject">SUBJECT</label>
+                                        <input type="text" id="subject" placeholder="Project inquiry..." required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message">MESSAGE</label>
+                                        <textarea id="message" rows="4" placeholder="Tell me about your project..." required></textarea>
+                                    </div>
+                                    <button type="submit" class="btn-submit-message">Send Message &rarr;</button>
+                                </form>
                             </div>
                         </div>
 
