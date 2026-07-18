@@ -1560,11 +1560,28 @@ html {
     .hamburger-menu {
         display: block;
     }
+    .home-hero-left {
+        padding: 0 10px;
+    }
     .hero-name {
-        font-size: 2.5rem !important;
+        font-size: 2.2rem !important;
+        white-space: normal !important;
+        word-wrap: break-word;
+        line-height: 1.2;
     }
     .hero-title {
-        font-size: 1.2rem !important;
+        font-size: 1.1rem !important;
+        line-height: 1.4;
+        margin-bottom: 15px;
+    }
+    .hero-desc {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    .btn-cv {
+        font-size: 0.9rem;
+        padding: 12px 15px;
+        white-space: nowrap;
     }
     .cert-detailed-grid, .skills-grid {
         grid-template-columns: 1fr;
