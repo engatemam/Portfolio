@@ -434,9 +434,10 @@ body {
 .contact-modal-content {
     position: relative;
     width: 90%;
-    max-width: 800px;
-    height: auto;
-    padding: 40px;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 30px;
     background: rgba(20, 20, 20, 0.95);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
@@ -461,13 +462,13 @@ body {
 }
 
 .contact-card {
-    flex: 1 1 120px;
-    max-width: 150px;
+    flex: 1 1 90px;
+    max-width: 110px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 15px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
