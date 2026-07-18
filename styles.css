@@ -1,9 +1,12 @@
 /* Netflix Portfolio Styles */
 :root {
-    --primary-gold: #fcbc1d;
-    --netflix-black: #141414;
-    --font-family: 'Poppins', Helvetica, Arial, sans-serif;
-    --transition: all 0.4s ease-in-out;
+    --primary-gold: #f5c518; /* A richer, more luxurious gold */
+    --gold-glow: rgba(245, 197, 24, 0.3);
+    --netflix-black: #0c0c0c; /* Deeper black for high contrast */
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(245, 197, 24, 0.15); /* Subtle gold border for glass elements */
+    --font-family: 'Outfit', Helvetica, Arial, sans-serif;
+    --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 * {
@@ -40,9 +43,11 @@ body {
 }
 
 .netflix-navbar.scrolled {
-    background-color: rgba(20, 20, 20, 0.8);
-    backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .nav-left {
@@ -733,7 +738,7 @@ body {
     margin-left: 1rem;
 }
 
-.text-gold {
+.text-accent {
     color: var(--primary-gold) !important;
 }
 
@@ -748,19 +753,19 @@ body {
 .project-card-detailed {
     display: flex;
     flex-direction: row;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
     border-radius: 16px;
     overflow: hidden;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 .project-card-detailed:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(252, 188, 29, 0.2);
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px var(--gold-glow);
     border-color: var(--primary-gold);
 }
 
@@ -908,20 +913,19 @@ body {
 .cert-card-detailed {
     display: flex;
     flex-direction: column;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
     border-radius: 16px;
     overflow: hidden;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 .cert-card-detailed:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(252, 188, 29, 0.2);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px var(--gold-glow);
     border-color: var(--primary-gold);
 }
 
@@ -1024,19 +1028,22 @@ body {
 
 .timeline-content {
     padding: 20px 30px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
     border-radius: 16px;
     position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
 .timeline-content:hover {
-    transform: translateX(8px);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px var(--gold-glow);
     border-color: var(--primary-gold);
 }
+
 
 .timeline-date {
     color: var(--primary-gold);
