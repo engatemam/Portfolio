@@ -323,15 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// --- Preloader Logic ---
-window.addEventListener('load', () => {
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
-        setTimeout(() => {
-            preloader.classList.add('hide');
-        }, 1500); // 1.5s artificial delay to show off the logo
-    }
-});
+
 
 // --- Scroll Features Logic ---
 document.addEventListener('scroll', () => {
