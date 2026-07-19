@@ -460,9 +460,9 @@ body {
 .contact-modal-content {
     position: relative;
     width: 90%;
-    max-width: 480px;
+    max-width: 440px;
     overflow: hidden;
-    padding: 25px 25px 20px;
+    padding: 20px 22px 18px;
     background: rgba(15, 15, 15, 0.95);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
@@ -471,7 +471,6 @@ body {
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px var(--gold-glow);
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
 }
 
 .contact-modal-content .modal-close {
@@ -493,37 +492,38 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 12px;
-    margin-top: 20px;
+    gap: 8px;
+    margin-top: 10px;
+    margin-bottom: 0;
 }
 
 .contact-card {
-    flex: 1 1 70px;
-    max-width: 85px;
+    flex: 1 1 55px;
+    max-width: 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 12px 8px;
+    padding: 8px 5px;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    border-radius: 12px;
+    border-radius: 10px;
     text-decoration: none;
     color: white;
     transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .contact-card i {
-    font-size: 1.6rem;
-    margin-bottom: 6px;
+    font-size: 1.3rem;
+    margin-bottom: 3px;
     color: var(--primary-gold);
 }
 
 .contact-card span {
     font-family: var(--font-heading);
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     font-weight: 600;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
 }
 
 .contact-card:hover {
@@ -538,9 +538,9 @@ body {
     display: flex;
     align-items: center;
     text-align: center;
-    margin: 15px 0 12px;
-    color: #666;
-    font-size: 0.75rem;
+    margin: 10px 0 8px;
+    color: #555;
+    font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -548,17 +548,17 @@ body {
 .contact-divider::after {
     content: "";
     flex: 1;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .contact-divider span {
-    padding: 0 12px;
+    padding: 0 10px;
 }
 
 .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    margin-top: 5px;
+    gap: 8px;
+    margin-top: 0;
 }
 
 .form-row {
@@ -575,21 +575,21 @@ body {
     text-align: left;
 }
 .form-group label {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 700;
-    color: #888;
-    margin-bottom: 5px;
+    color: #777;
+    margin-bottom: 4px;
     letter-spacing: 1px;
 }
 .form-group input,
 .form-group textarea {
-    background: #1e1e24;
+    background: #1a1a1f;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    padding: 9px 14px;
+    border-radius: 6px;
+    padding: 7px 12px;
     color: #fff;
     font-family: inherit;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     outline: none;
     transition: border-color 0.3s;
 }
@@ -603,13 +603,13 @@ body {
     color: #111;
     font-family: var(--font-heading);
     font-weight: 700;
-    font-size: 0.95rem;
-    padding: 12px;
+    font-size: 0.85rem;
+    padding: 10px;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
     transition: opacity 0.3s, transform 0.3s, box-shadow 0.3s;
-    margin-top: 5px;
+    margin-top: 2px;
     letter-spacing: 0.5px;
 }
 .btn-submit-message:hover {
