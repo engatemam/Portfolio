@@ -28,10 +28,14 @@
     <!-- Back to Top Button -->
     <button id="back-to-top" title="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
 
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
     <!-- Netflix Navbar -->
     <nav class="netflix-navbar" id="navbar">
+        <div class="nav-indicator"></div>
         <div class="nav-left">
-            <a href="#home" style="text-decoration: none;">
+            <a href="#" onclick="window.scrollTo(0,0); return false;" style="text-decoration: none;">
                 <img src="logo_transparent.png" alt="ENG AHMED EMAM" class="site-logo">
             </a>
         </div>
@@ -885,7 +889,7 @@
                                 <div class="contact-divider">
                                     <span>Or send a direct message</span>
                                 </div>
-                                <form class="contact-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Message Sent!'); closeContact();">
+                                <form class="contact-form" action="#" method="POST">
                                     <div class="form-row">
                                         <div class="form-group">
                                             <label for="name">NAME</label>

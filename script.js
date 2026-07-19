@@ -54,12 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${entry.target.id}`) {
-                        link.classList.add('active');
-                    }
-                });
+                // ScrollSpy logic intentionally removed to prevent sticky active states
             }
         });
     }, observerOptions);
@@ -67,6 +62,26 @@ document.addEventListener("DOMContentLoaded", () => {
     sections.forEach(sec => {
         observer.observe(sec);
     });
+
+    // 4. Mouse Wheel Horizontal Scroll for Certificates
+    const certGrid = document.querySelector('.cert-detailed-grid');
+    if (certGrid) {
+        certGrid.addEventListener('wheel', (evt) => {
+            const maxScrollLeft = certGrid.scrollWidth - certGrid.clientWidth;
+            
+            // If at the boundary, allow default page vertical scroll
+            if ((evt.deltaY < 0 && certGrid.scrollLeft <= 0) || 
+                (evt.deltaY > 0 && certGrid.scrollLeft >= maxScrollLeft - 1)) {
+                return; 
+            }
+            
+            evt.preventDefault();
+            certGrid.scrollBy({
+                left: evt.deltaY * 1.5,
+                behavior: 'auto'
+            });
+        }, { passive: false });
+    }
 
 });
 
@@ -385,29 +400,153 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // ================= PREMIUM UX UPGRADES ================= //
+
+    // 1. Smart Nav Indicator
+    const navIndicator = document.querySelector('.nav-indicator');
+    const navLinksArray = Array.from(navLinks);
+    
+    const updateNavIndicator = (activeLink) => {
+        if (!activeLink || !navIndicator) return;
+        const rect = activeLink.getBoundingClientRect();
+        const navRect = document.querySelector('.nav-center').getBoundingClientRect();
+        // Calculate relative position within the nav-center
+        const leftPos = rect.left - navRect.left + (rect.width / 2) - 3;
+        navIndicator.style.left = `${leftPos}px`;
+        navIndicator.style.opacity = '1';
+    };
+
     const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const currentId = entry.target.getAttribute('id');
                 if (currentId) {
-                    // We removed the history.replaceState so the URL stays completely clean
-                    
-                    // Update active nav link color dynamically
-                    navLinks.forEach(link => {
-                        // Avoid overriding the Contact Me button style if it doesn't point to a section
-                        if (link.getAttribute('href').startsWith('#')) {
-                            link.style.color = (link.getAttribute('href') === `#${currentId}`) ? 'var(--primary-gold)' : '';
-                        }
-                    });
+                    const activeLink = document.querySelector(`.nav-links a[href="#${currentId}"]`);
+                    if (activeLink) updateNavIndicator(activeLink);
                 }
             }
         });
-    }, {
-        threshold: 0.3, // Trigger when 30% is visible
-        rootMargin: "-60px 0px -60px 0px"
+    }, { threshold: 0.4, rootMargin: "-50px 0px -50px 0px" });
+
+    sections.forEach(section => sectionObserver.observe(section));
+
+    // Handle clicks for indicator immediately
+    navLinks.forEach(link => {
+        if(link.getAttribute('href').startsWith('#')) {
+            link.addEventListener('click', (e) => {
+                updateNavIndicator(e.target);
+            });
+        }
     });
 
-    sections.forEach(section => {
-        sectionObserver.observe(section);
+    // 3. Scroll Reveal Animations (AOS Style)
+    // First, let's dynamically add reveal classes to elements if they don't have them
+    document.querySelectorAll('.page-title').forEach(el => el.classList.add('reveal'));
+    document.querySelectorAll('.project-card-detailed, .skill-category, .timeline-item').forEach(el => el.classList.add('reveal'));
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target); // Only animate once
+            }
+        });
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+        revealObserver.observe(el);
     });
+
+    // 4. Interactive 3D Tilt for Cards
+    const tiltCards = document.querySelectorAll('.project-card-detailed, .skill-item');
+    tiltCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = ((y - centerY) / centerY) * -5; // max 5 deg
+            const rotateY = ((x - centerX) / centerX) * 5;  // max 5 deg
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            // Remove inline transform to allow CSS hover to take over smoothly
+            card.style.transform = '';
+        });
+    });
+
+});
+
+// 5. Sleek Toast Notification
+window.showToast = function(message, type = 'success') {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+    
+    const toast = document.createElement('div');
+    toast.className = 'ux-toast';
+    toast.innerHTML = `<i class="fa-solid fa-check-circle"></i> <span>${message}</span>`;
+    
+    container.appendChild(toast);
+    
+    // Trigger animation
+    setTimeout(() => toast.classList.add('show'), 10);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 400);
+    }, 3000);
+};
+
+// Intercept form submission for Contact Form to use Toast instead of Alert
+document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.querySelector('.contact-modal-content form');
+    if (contactForm) {
+        contactForm.removeAttribute('onsubmit');
+        
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent page reload
+            
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(contactForm);
+
+            try {
+                const response = await fetch('https://formspree.io/f/xlgqnrel', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Show custom premium toast
+                    showToast("Message sent successfully! ✨ I'll get back to you soon.");
+                    
+                    // Reset form and close modal
+                    contactForm.reset();
+                    setTimeout(() => {
+                        closeContact();
+                    }, 1500);
+                } else {
+                    showToast("Oops! There was a problem submitting your form.", "error");
+                }
+            } catch (error) {
+                showToast("Oops! There was a problem submitting your form.", "error");
+            } finally {
+                // Restore button state
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        });
+    }
 });
