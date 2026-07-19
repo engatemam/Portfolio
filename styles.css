@@ -460,7 +460,7 @@ body {
 .contact-modal-content {
     position: relative;
     width: 90%;
-    max-width: 440px;
+    max-width: 580px;
     overflow: hidden;
     padding: 20px 22px 18px;
     background: rgba(15, 15, 15, 0.95);
