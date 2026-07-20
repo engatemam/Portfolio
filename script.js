@@ -442,7 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Scroll Reveal Animations (AOS Style)
     // First, let's dynamically add reveal classes to elements if they don't have them
     document.querySelectorAll('.page-title').forEach(el => el.classList.add('reveal'));
-    document.querySelectorAll('.project-card-detailed, .skill-category, .timeline-item').forEach(el => el.classList.add('reveal'));
+    document.querySelectorAll('.project-card-detailed, .bento-tile, .journey-milestone').forEach(el => el.classList.add('reveal'));
 
     const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
