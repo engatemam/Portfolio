@@ -402,43 +402,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ================= PREMIUM UX UPGRADES ================= //
 
-    // 1. Smart Nav Indicator
-    const navIndicator = document.querySelector('.nav-indicator');
-    const navLinksArray = Array.from(navLinks);
-    
-    const updateNavIndicator = (activeLink) => {
-        if (!activeLink || !navIndicator) return;
-        const rect = activeLink.getBoundingClientRect();
-        const navRect = document.querySelector('.nav-center').getBoundingClientRect();
-        // Calculate relative position within the nav-center
-        const leftPos = rect.left - navRect.left + (rect.width / 2) - 3;
-        navIndicator.style.left = `${leftPos}px`;
-        navIndicator.style.opacity = '1';
-    };
-
-    const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const currentId = entry.target.getAttribute('id');
-                if (currentId) {
-                    const activeLink = document.querySelector(`.nav-links a[href="#${currentId}"]`);
-                    if (activeLink) updateNavIndicator(activeLink);
-                }
-            }
-        });
-    }, { threshold: 0.4, rootMargin: "-50px 0px -50px 0px" });
-
-    sections.forEach(section => sectionObserver.observe(section));
-
-    // Handle clicks for indicator immediately
-    navLinks.forEach(link => {
-        if(link.getAttribute('href').startsWith('#')) {
-            link.addEventListener('click', (e) => {
-                updateNavIndicator(e.target);
-            });
-        }
-    });
-
     // 3. Scroll Reveal Animations (AOS Style)
     // First, let's dynamically add reveal classes to elements if they don't have them
     document.querySelectorAll('.page-title').forEach(el => el.classList.add('reveal'));
